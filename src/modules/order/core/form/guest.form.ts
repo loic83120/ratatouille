@@ -1,5 +1,7 @@
+import { OrderingDomainModel } from '@ratatouille/modules/order/core/model/ordering.domain-model';
+
 export class GuestForm {
-  addGuest() {
-    return [];
+  addGuest(state: OrderingDomainModel.Guest[]) {
+    return [{ id: '1', firstname: 'Luke', lastname: 'Skywalker', age: 53 }];
   }
 }
