@@ -11,7 +11,7 @@ export const GuestsSection: React.FC<{}> = () => {
   return (
     <Box sx={{ marginTop: 2 }}>
       <Typography variant='h5'>Invités</Typography>
-      <Grid sx={{ paddingTop: 2 }} rowSpacing={4}>
+      <Grid sx={{ paddingTop: 2 }} rowSpacing={4} data-cy='guest-row-container'>
         {presenter.form.guests.map((guest) => (
           <Box key={Math.random()}>
             <GuestRow
@@ -21,18 +21,19 @@ export const GuestsSection: React.FC<{}> = () => {
               age={guest.age}
               onChange={presenter.updateGuest}
               onRemove={presenter.removeGuest}
+              data-cy='guest-row'
             />
           </Box>
         ))}
       </Grid>
       <Grid container direction={'row'} alignItems={'center'} spacing={1} marginTop={2}>
         <Grid item>
-          <Button variant='contained' onClick={presenter.addGuest}>
+          <Button variant='contained' onClick={presenter.addGuest} data-testid='addGuest'>
             Ajouter
           </Button>
         </Grid>
         <Grid item>
-          <Button variant='contained' onClick={presenter.onNext}>
+          <Button variant='contained' onClick={presenter.onNext} data-testid='removeGuest'>
             Suivant
           </Button>
         </Grid>
