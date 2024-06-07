@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
-import { OrderingDomainModel } from '@ratatouille/modules/order/core/model/ordering.domain-model';
-import { GuestForm } from '@ratatouille/modules/order/core/form/guest.form';
-import { useDependencies } from '@ratatouille/modules/app/react/DependenciesProvider';
+import React, { useRef } from "react";
+import { OrderingDomainModel } from "@ratatouille/modules/order/core/model/ordering.domain-model";
+import { GuestForm } from "@ratatouille/modules/order/core/form/guest.form";
+import { useDependencies } from "@ratatouille/modules/app/react/DependenciesProvider";
 
 export const useGuestsSection = () => {
   function addGuest() {
@@ -14,14 +14,24 @@ export const useGuestsSection = () => {
     setForm(newState);
   }
 
-  function updateGuest(id: string, key: string, value: any) {}
+  function updateGuest<T extends keyof OrderingDomainModel.Guest>(
+    id: string,
+    key: T,
+    value: OrderingDomainModel.Guest[T]
+  ) {
+    const newState = guestForm.current.updateGuest(form, id, key, value);
+    setForm(newState);
+  }
 
-  function changeOrganizer() {}
+  function changeOrganizer(id: string) {
+    const newState = guestForm.current.changeOrganizer(form, id);
+    setForm(newState);
+  }
 
   function onNext() {}
 
   function isSubmitable() {
-    return false;
+    return guestForm.current.isSubmitable(form);
   }
 
   const { idProvider } = useDependencies();
